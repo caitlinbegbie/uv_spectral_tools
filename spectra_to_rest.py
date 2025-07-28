@@ -49,7 +49,7 @@ def spectra_to_rest(file_path):
         
     except ValueError as e:
         print(f'Cannot normalize {file_path}: {e}')
-        return None, None, None
+        return None, None
     
     # Step 5: create common wl grid to ensure length of each spectra is the same 
     wl_min = max(wl_a.min(), wl_b.min())
@@ -57,7 +57,7 @@ def spectra_to_rest(file_path):
 
     if wl_max <= wl_min:
         print(f'Cannot analyze {file_path} - wavelength ranges do not overlap with basis!')
-        return None, None, None
+        return None, None
         
     common_wl = np.linspace(max(wl_a.min(), wl_b.min()), min(wl_a.max(), wl_b.max()), min(len(wl_a), len(wl_b)))
 
@@ -71,11 +71,11 @@ def spectra_to_rest(file_path):
     # checking for invalid/empty results
     if len(new_flux_norm_a) == 0 or len(new_flux_norm_b) == 0:
         print(f"Cannot analyze {file_path} — interpolated flux array is empty.")
-        return None, None, None
+        return None, None
 
     if np.all(np.isnan(new_flux_norm_a)) or np.all(np.isnan(new_flux_norm_b)):
         print(f"Cannot analyze {file_path} — interpolated flux is all NaNs.")
-        return None, None, None
+        return None, None
     
     # Step 6: cross correlate to basis spectrum
     shift, corr_coeff, err = cross_correlate(new_flux_norm_a, new_flux_norm_b, wave_a=common_wl, wave_b=common_wl)
@@ -83,7 +83,7 @@ def spectra_to_rest(file_path):
     # checking that error < correlation coefficient
     if (err >= corr_coeff):
         print(f'Cannot cross-correlate {file_path}: Error exceeds correlation coefficient!')
-        return None, None, None
+        return None, None
 
     # Step 7: Apply wavelength shift of original input spectra using Alpha Cen A RV value
     shifted_wls = wl_b + shift
