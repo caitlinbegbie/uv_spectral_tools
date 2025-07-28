@@ -28,7 +28,7 @@ def spectra_to_rest(file_path):
         * rest-shifted wavelengths
         * continuum - normalized fluxes
     """
-    aca_basis = 'data/hst_14788_stis_hd128620_e230h_od5c_cspec.fits'   # chosen by SNR values
+    aca_basis = 'data/shifting_data/hst_14788_stis_hd128620_e230h_od5c_cspec.fits'   # chosen by SNR values
 
     # Step 1: load input spectrum and basis spectrum (internal)
     wl_a, flux_a = load_spectrum(aca_basis)
@@ -109,7 +109,7 @@ def shift_to_aca(file, plot=False):
     if plot=True, function will produce a plot of the original Alpha Centauri A spectrum compared to the shifted comparison spectrum using matplotlib.
     """
     # Load basis and target spectra
-    aca_basis = 'data/hst_14788_stis_hd128620_e230h_od5c_cspec.fits'   # chosen by SNR values
+    aca_basis = 'data/shifting_data/hst_14788_stis_hd128620_e230h_od5c_cspec.fits'   # chosen by SNR values
     star_name = file.split('_')[3]
     
     wl_a, flux_a = load_spectrum(aca_basis)
