@@ -284,7 +284,7 @@ def fit_continuum(star_wl, env_wl, env_flux):
 
 def normalize_spectrum(wl, flux, continuum):
     """
-    Designed to normalize spectra using median value of characteristically flat region from ~1650 - 1700 Å in Sun-like stars.
+    Designed to normalize spectra using median value of characteristically flat region from ~2650 - 2700 Å in Sun-like stars.
     Unsure yet if this process will work in chemically peculiar instances.
     """
     # normalize using median of flat region (trending feature)
